@@ -20,7 +20,7 @@ const About = () => {
     >
       {/* Heading */}
       <motion.h1
-        className="my-20 text-center text-4xl"
+        className="mt-20 pt-20 text-center text-4xl mb-5"
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         variants={fadeInUp}
@@ -56,7 +56,7 @@ const About = () => {
           animate={isInView ? "visible" : "hidden"}
           variants={fadeInUp}
         >
-          <div className="flex justify-center lg:justify-start">
+          <div className="flex justify-center lg:justify-start lg:pt-20">
             <motion.p
               className="my-2 max-w-xl py-6"
               initial={{ opacity: 0, y: 50 }}

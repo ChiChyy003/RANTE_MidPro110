@@ -13,7 +13,7 @@ const Experience = () => {
       animate="visible"
       className="border-b border-neutral-900 pb-24"
     >
-      <h2 className="my-20 text-center text-4xl">Experience</h2>
+      <h2 className="my-20 mt-20 pt-20 text-center text-4xl">Experience</h2>
       <div>
         {EXPERIENCES.map((experience, index) => (
           <motion.div

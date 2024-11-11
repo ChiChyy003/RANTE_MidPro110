@@ -8,14 +8,23 @@ import { motion } from "framer-motion";
 
 const Technologies = () => {
   return (
-    <div className="border-b border-neutral-800 pb-24">
-      <h1 className="my-20 text-center text-4xl">Technologies</h1>
-      <div className="flex flex-wrap items-center justify-center gap-4">
+    <div className="mt-20 pt-20 border-b border-neutral-800 pb-24"> {/* Added mt-20 for spacing */}
+      {/* Title with falling animation */}
+      <motion.h1
+        className="my-10 text-center text-4xl"
+        initial={{ y: -50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 400, damping: 20 }}
+      >
+        Technologies
+      </motion.h1>
 
+      <div className="flex flex-wrap items-center justify-center gap-6 px-4"> {/* Added px-4 for padding */}
         {/* React Icon */}
         <motion.div
-          whileHover={{ scale: 1.2 }}
-          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 400, damping: 20, delay: 0.1 }}
           className="rounded-2xl border-4 border-neutral-800 p-4"
         >
           <RiReactjsLine className="text-7xl text-cyan-400" />
@@ -23,8 +32,9 @@ const Technologies = () => {
 
         {/* Next.js Icon */}
         <motion.div
-          whileHover={{ scale: 1.2 }}
-          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 400, damping: 20, delay: 0.2 }}
           className="rounded-2xl border-4 border-neutral-800 p-4"
         >
           <TbBrandNextjs className="text-7xl" />
@@ -32,8 +42,9 @@ const Technologies = () => {
 
         {/* MongoDB Icon */}
         <motion.div
-          whileHover={{ scale: 1.2 }}
-          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 400, damping: 20, delay: 0.3 }}
           className="rounded-2xl border-4 border-neutral-800 p-4"
         >
           <SiMongodb className="text-7xl text-green-400" />
@@ -41,8 +52,9 @@ const Technologies = () => {
 
         {/* Redis Icon */}
         <motion.div
-          whileHover={{ scale: 1.2 }}
-          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 400, damping: 20, delay: 0.4 }}
           className="rounded-2xl border-4 border-neutral-800 p-4"
         >
           <DiRedis className="text-7xl text-red-700" />
@@ -50,8 +62,9 @@ const Technologies = () => {
 
         {/* Node.js Icon */}
         <motion.div
-          whileHover={{ scale: 1.2 }}
-          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 400, damping: 20, delay: 0.5 }}
           className="rounded-2xl border-4 border-neutral-800 p-4"
         >
           <FaNodeJs className="text-7xl text-green-500" />
@@ -59,11 +72,12 @@ const Technologies = () => {
 
         {/* PostgreSQL Icon */}
         <motion.div
-          whileHover={{ scale: 1.2 }}
-          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 400, damping: 20, delay: 0.6 }}
           className="rounded-2xl border-4 border-neutral-800 p-4"
         >
-          <BiLogoPostgresql className="text-7xl text-sky-700" />
+          <BiLogoPostgresql className="text-7xl text-blue-500" />
         </motion.div>
       </div>
     </div>

@@ -22,7 +22,7 @@ const Projects = () => {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="border-b border-neutral-900 pb-24"
+      className="border-b border-neutral-900 pb-24 mt-20 pt-2"
     >
       <h2 className="my-20 text-center text-4xl">Projects</h2>
       <div>
