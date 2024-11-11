@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { Certificates as CertificateData } from "../constants"; 
+import React, { useState, useEffect } from 'react';
+import ScrollReveal from 'scrollreveal';
+import { Certificates as CertificateData } from '../constants';
 import certcss from '../assets/projects/certcss.png';
 import certhtml from '../assets/projects/certhtml.png';
 import certjava from '../assets/projects/certjava.png';
 import certjavainter from '../assets/projects/certjavainter.png';
 import certjs from '../assets/projects/certjs.png';
 
-// Map images to certificate data
 const imageMap = {
   certcss: certcss,
   certhtml: certhtml,
@@ -19,6 +18,19 @@ const imageMap = {
 const CertificatesDisplay = () => {
   const [selectedCertificate, setSelectedCertificate] = useState(null);
 
+  useEffect(() => {
+    // Apply ScrollReveal with staggered effect
+    ScrollReveal().reveal('.certificate-item', {
+      distance: '70px',
+      origin: 'top',
+      opacity: 0,
+      duration: 700,
+      easing: 'ease-out',
+      interval: 300, // Delay each item slightly
+      reset:true,
+    });
+  }, []);
+
   const openModal = (certificate) => {
     setSelectedCertificate(certificate);
   };
@@ -28,49 +40,33 @@ const CertificatesDisplay = () => {
   };
 
   return (
-    <motion.div
-      initial="hidden"
-      animate="visible"
-      className="border-b border-neutral-900 pb-24 mt-20 pt-1"
-    >
+    <div className="border-b border-neutral-900 pb-24">
       {/* Title Animation */}
-      <motion.h2
-        initial={{ y: -50, opacity: 0 }}  // Start above the screen and invisible
-        animate={{ y: 0, opacity: 1 }}    // Animate to its normal position with full opacity
-        transition={{ duration: 0.7 }}
-        className="my-20 text-center text-4xl"
-      >
+      <h2 className="mb-10 text-center text-4xl transition-opacity duration-700">
         Certificates
-      </motion.h2>
+      </h2>
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
         {CertificateData.map((certificate, index) => (
-          <motion.div
+          <div
             key={index}
-            className="relative"
-            whileHover={{ scale: 1.05 }}
+            className="certificate-item relative transform transition-transform duration-300 ease-out hover:scale-105 cursor-pointer"
             onClick={() => openModal(certificate)}
-            initial={{ y: -50, opacity: 0 }}  // Start above the screen and invisible
-            animate={{ y: 0, opacity: 1 }}    // Animate to its final position with full opacity
-            transition={{ duration: 0.7, delay: index * 0.2 }} // Delay each certificate slightly
           >
-            {/* Motion image with fade and fall effect */}
-            <motion.img
-              src={imageMap[certificate.image]} 
-              alt={certificate.title} 
-              className="cursor-pointer"
+            <img
+              src={imageMap[certificate.image]}
+              alt={certificate.title}
+              className="w-full rounded"
               width={400}
               height={300}
-              initial={{ opacity: 0 }}  // Start invisible
-              animate={{ opacity: 1 }}   // Fade in
-              transition={{ duration: 0.5 }}
             />
-          </motion.div>
+          </div>
         ))}
       </div>
 
+      {/* Modal for selected certificate */}
       {selectedCertificate && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 transition-opacity duration-500 ease-in-out">
           <div className="bg-white p-6 rounded-lg max-w-md w-full relative">
             <button
               className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
@@ -80,13 +76,15 @@ const CertificatesDisplay = () => {
             </button>
             <h6 className="font-semibold text-lg mb-2">
               {selectedCertificate.title} -{' '}
-              <span className="text-sm text-purple-600">{selectedCertificate.technologies.join(', ')}</span>
+              <span className="text-sm text-purple-600">
+                {selectedCertificate.technologies.join(', ')}
+              </span>
             </h6>
             <p className="text-neutral-600 mb-4">{selectedCertificate.description}</p>
           </div>
         </div>
       )}
-    </motion.div>
+    </div>
   );
 };
 

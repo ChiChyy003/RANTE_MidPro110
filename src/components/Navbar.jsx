@@ -1,6 +1,5 @@
 import logo from "../assets/Mainlogo.png";
 import { FaLinkedin, FaGithub, FaTwitterSquare, FaInstagram } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import { motion } from "framer-motion"; // Import framer-motion
 
@@ -9,6 +8,14 @@ const Navbar = () => {
 
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen); // Toggle menu visibility
+  };
+
+  const handleScroll = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+      setIsMenuOpen(false); // Close menu after scrolling
+    }
   };
 
   return (
@@ -22,13 +29,13 @@ const Navbar = () => {
         {/* Desktop Links */}
         <div className="hidden md:flex items-center space-x-8 text-white">
           {['Hero', 'About', 'Experience', 'Projects', 'Certificates', 'Technologies', 'Contact'].map((section) => (
-            <Link
+            <span
               key={section}
-              to={`/${section.toLowerCase()}`}
+              onClick={() => handleScroll(section.toLowerCase())}
               className="cursor-pointer hover:text-blue-400 transition-colors duration-300"
             >
               {section}
-            </Link>
+            </span>
           ))}
         </div>
 
@@ -54,41 +61,39 @@ const Navbar = () => {
 
       {/* Mobile Menu with Sliding and Fading Effect */}
       <motion.div
-  className="md:hidden bg-neutral-900/80 backdrop-blur-lg"
-  initial={{ opacity: 0, y: -40 }} // Start off-screen and hidden
-  animate={{
-    opacity: isMenuOpen ? 1 : 0, // Fade in and out when opening and closing
-    y: isMenuOpen ? 0 : -40, // Slide in and out when opening and closing
-  }}
-  transition={{
-    opacity: { duration: 0.3 }, // Adjust duration for fading effect
-    y: { type: "spring", stiffness: 150, damping: 25 }, // Smoother sliding effect
-  }}
-  style={{
-    display: isMenuOpen ? 'block' : 'none', // Ensure menu is hidden when closed
-  }}
->
-  <div className="flex flex-col items-center space-y-4 py-4 text-white">
-    {['Hero', 'About', 'Experience', 'Projects', 'Certificates', 'Technologies', 'Contact'].map((section) => (
-      <Link
-        key={section}
-        to={`/${section.toLowerCase()}`}
-        className="cursor-pointer hover:text-blue-400 transition-colors duration-300"
-        onClick={() => setIsMenuOpen(false)} // Close the menu when a link is clicked
+        className="md:hidden bg-neutral-900/80 backdrop-blur-lg"
+        initial={{ opacity: 0, y: -40 }} // Start off-screen and hidden
+        animate={{
+          opacity: isMenuOpen ? 1 : 0, // Fade in and out when opening and closing
+          y: isMenuOpen ? 0 : -40, // Slide in and out when opening and closing
+        }}
+        transition={{
+          opacity: { duration: 0.3 }, // Adjust duration for fading effect
+          y: { type: "spring", stiffness: 150, damping: 25 }, // Smoother sliding effect
+        }}
+        style={{
+          display: isMenuOpen ? 'block' : 'none', // Ensure menu is hidden when closed
+        }}
       >
-        {section}
-      </Link>
-    ))}
-    {/* Social Icons in Mobile */}
-    <div className="flex gap-4 text-2xl">
-      <FaLinkedin className="cursor-pointer hover:text-blue-400 transition-colors duration-300" />
-      <FaGithub className="cursor-pointer hover:text-blue-400 transition-colors duration-300" />
-      <FaInstagram className="cursor-pointer hover:text-blue-400 transition-colors duration-300" />
-      <FaTwitterSquare className="cursor-pointer hover:text-blue-400 transition-colors duration-300" />
-    </div>
-  </div>
-</motion.div>
-
+        <div className="flex flex-col items-center space-y-4 py-4 text-white">
+          {['Hero', 'About', 'Experience', 'Projects', 'Certificates', 'Technologies', 'Contact'].map((section) => (
+            <span
+              key={section}
+              onClick={() => handleScroll(section.toLowerCase())}
+              className="cursor-pointer hover:text-blue-400 transition-colors duration-300"
+            >
+              {section}
+            </span>
+          ))}
+          {/* Social Icons in Mobile */}
+          <div className="flex gap-4 text-2xl">
+            <FaLinkedin className="cursor-pointer hover:text-blue-400 transition-colors duration-300" />
+            <FaGithub className="cursor-pointer hover:text-blue-400 transition-colors duration-300" />
+            <FaInstagram className="cursor-pointer hover:text-blue-400 transition-colors duration-300" />
+            <FaTwitterSquare className="cursor-pointer hover:text-blue-400 transition-colors duration-300" />
+          </div>
+        </div>
+      </motion.div>
     </nav>
   );
 };

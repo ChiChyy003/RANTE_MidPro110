@@ -15,12 +15,13 @@ const About = () => {
 
   return (
     <div
-      className="border-b border-neutral-900 pb-4"
+      id="about" // Add the id here to match the navbar link
+      className="my-10 border-b border-neutral-900 pb-4 overflow-hidden"
       ref={ref}
     >
       {/* Heading */}
       <motion.h1
-        className="mt-20 pt-20 text-center text-4xl mb-5"
+        className="text-center text-4xl mb-5"
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         variants={fadeInUp}

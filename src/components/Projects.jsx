@@ -1,67 +1,57 @@
 import { PROJECTS } from '../constants';
-import { motion } from 'framer-motion';
+import ScrollReveal from 'scrollreveal';
+import { useEffect } from 'react';
 
 const Projects = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3, 
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: -100 }, 
-    visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-  };
+  useEffect(() => {
+    // Apply ScrollReveal to each project item with stagger effect
+    ScrollReveal().reveal('.project-item', {
+      distance: '50px',
+      origin: 'left',
+      opacity: 0,
+      duration: 600,
+      easing: 'ease-out',
+      interval: 300, // Mimic staggerChildren
+      reset:true,
+    });
+  }, []);
 
   return (
-    <motion.div
-      initial="hidden"
-      animate="visible"
-      variants={containerVariants}
-      className="border-b border-neutral-900 pb-24 mt-20 pt-2"
-    >
-      <h2 className="my-20 text-center text-4xl">Projects</h2>
+    <div className="overflow-hidden border-b border-neutral-900 pb-24 mt-10">
+      <h2 className="mb-10 text-center text-4xl">Projects</h2>
       <div>
         {PROJECTS.map((project, index) => (
-          <motion.div
+          <div
             key={index}
-            variants={itemVariants}
-            whileHover={{ scale: 1.05 }} 
-            className="mb-8 flex flex-wrap lg:justify-center"
+            className="project-item mb-8 flex flex-wrap lg:justify-center transition-transform duration-300 ease-out hover:scale-105" // Hover scale effect on item
           >
             <div className="w-full lg:w-1/4">
-              <motion.img
+              <img
                 src={project.image}
-                width={300} // Updated width
-                height={300} // Updated height
+                width={300}
+                height={300}
                 alt={project.title}
-                className="mb-6 rounded"
-                whileHover={{ rotate: 5 }} 
-                transition={{ type: 'spring', stiffness: 300 }} 
+                className="mb-6 rounded transition-transform duration-300 ease-out hover:rotate-5" // Hover rotation effect on image
               />
             </div>
             <div className="w-full max-w-xl lg:w-3/4">
               <h6 className="mb-2 font-semibold">{project.title}</h6>
               <p className="mb-4 text-neutral-400">{project.description}</p>
-              {project.technologies.map((tech, index) => (
-                <motion.span
-                  key={index}
-                  className="mr-4 rounded bg-neutral-900 px-2 py-1 text-sm font-medium text-purple-800"
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {tech}
-                </motion.span>
-              ))}
+              <div className="flex flex-wrap">
+                {project.technologies.map((tech, techIndex) => (
+                  <span
+                    key={techIndex}
+                    className="mr-4 rounded bg-neutral-900 px-2 py-1 text-sm font-medium text-purple-800 transition-transform duration-200 ease-out hover:scale-110" // Hover scale effect on technologies
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
-    </motion.div>
+    </div>
   );
 };
 

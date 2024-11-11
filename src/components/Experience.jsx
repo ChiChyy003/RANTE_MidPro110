@@ -1,30 +1,31 @@
 import { EXPERIENCES } from '../constants';
-import { motion } from 'framer-motion';
+import ScrollReveal from 'scrollreveal';
+import { useEffect } from 'react';
 
 const Experience = () => {
-  const containerVariants = (direction) => ({
-    hidden: direction === 'left' ? { opacity: 0, x: -100 } : { opacity: 0, x: 100 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: 'easeOut' } },
-  });
+  useEffect(() => {
+    // Apply ScrollReveal to each experience item
+    ScrollReveal().reveal('.experience-item', {
+      distance: '50px',
+      origin: 'left',
+      opacity: 0,
+      duration: 800,
+      easing: 'ease-out',
+      interval: 200, // Stagger each item slightly
+      reset:true,
+    });
+  }, []);
 
   return (
-    <motion.div
-      initial="hidden"
-      animate="visible"
-      className="border-b border-neutral-900 pb-24"
-    >
-      <h2 className="my-20 mt-20 pt-20 text-center text-4xl">Experience</h2>
+    <div className="border-b border-neutral-900 pb-24 overflow-hidden">
+      <h2 className="my-10 text-center text-4xl">Experience</h2>
       <div>
         {EXPERIENCES.map((experience, index) => (
-          <motion.div
+          <div
             key={index}
-            variants={containerVariants(index % 2 === 0 ? 'left' : 'right')} // Alternating sides for animation
-            initial="hidden"
-            animate="visible"
-            className="mb-8 flex flex-col lg:flex-row lg:justify-center" // Use flex-col on small screens, flex-row on larger screens
-            whileHover={{ scale: 1.02 }} // Slight hover effect
+            className="experience-item mb-8 flex flex-col lg:flex-row lg:justify-center transition-transform duration-300 ease-out hover:scale-105" // Hover effect here
           >
-            <div className="w-full lg:w-1/4 mb-4 lg:mb-0"> {/* Ensure proper spacing for smaller screens */}
+            <div className="w-full lg:w-1/4 mb-4 lg:mb-0">
               <p className="mb-2 text-sm text-neutral-400">{experience.year}</p>
             </div>
             <div className="w-full max-w-xl lg:w-3/4">
@@ -33,7 +34,7 @@ const Experience = () => {
                 <span className="text-sm text-purple-100">{experience.company}</span>
               </h6>
               <p className="mb-4 text-neutral-400">{experience.description}</p>
-              <div className="flex flex-wrap"> {/* Wrap technologies for responsiveness */}
+              <div className="flex flex-wrap">
                 {experience.technologies.map((tech, index) => (
                   <span
                     key={index}
@@ -44,10 +45,10 @@ const Experience = () => {
                 ))}
               </div>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
-    </motion.div>
+    </div>
   );
 };
 

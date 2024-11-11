@@ -14,7 +14,7 @@ const Contact = () => {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="mt-20 pt-20 border-b border-neutral-900 pb-20 px-4"
+      className=" border-b border-neutral-900 pb-20 px-4"
     >
       <h2 className="my-10 text-center text-4xl">Contact</h2>
 
@@ -41,6 +41,10 @@ const Contact = () => {
         <FaInstagram className="cursor-pointer hover:text-blue-400 transition-colors duration-300" />
         <FaTwitterSquare className="cursor-pointer hover:text-blue-400 transition-colors duration-300" />
       </div>
+      <div className="flex justify-center items-center mt-10">
+  <span className="text-center">All Rights Reserved - 2024 &copy;</span>
+</div>
+
     </motion.div>
   );
 };
